@@ -1,0 +1,59 @@
+<h1>Edit a new article</h1>
+<img src="" alt="">
+<% if @article.errors.any? %>
+   <h2>The folowing errors prevent the articles from being saved</h2>
+   <ul>
+    <% @article.errors.full_messages.each do |msg| %>
+        <li><%=msg%></li>  
+  
+    <%end%>
+    </ul>
+<%end%>
+
+<%= form_with(model: @article, url: update_article_path, local: true) do |f|%>
+   <p>
+    <%= f.label :title%>
+    <br/>
+    <%= f.text_field :body%>
+   </p>
+
+   <p>
+    <%= f.label :description%>
+    <br/>
+    <%= f.text_area :body%>
+  </p>
+  <p>
+  <% if @article.photo.attached?%>
+  <img id="img_prev"  src="<%=(url_for(@article.photo))%>" alt="">
+  <% end %>
+   
+ 
+
+  <%= f.label :Image%>
+  <br/>
+  <%= f.file_field :photo%>
+</p>
+  <p>
+     <%= f.submit %>
+ 
+    </p>
+
+
+    <% end %>
+    <%= link_to 'Cancel and Return to articles listing',articles_path %> 
+    
+    <script>
+    
+    const uploadImageInput = document.getElementById("article_photo")
+    const output = document.getElementById('img_prev');
+    uploadImageInput.onchange = function(){
+        console.log('file change')
+        
+        var reader = new FileReader();
+        reader.onload = function(){
+          output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+    
+    </script>
