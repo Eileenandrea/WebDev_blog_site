@@ -1,47 +1,59 @@
-<h1>Edit a new article</h1>
-<img src="" alt="">
-<% if @article.errors.any? %>
-   <h2>The folowing errors prevent the articles from being saved</h2>
-   <ul>
-    <% @article.errors.full_messages.each do |msg| %>
-        <li><%=msg%></li>  
-  
+<div class="main-body">
+    <h1 class="heading-primary-h1">Edit Article</h1>
+    <img src="" alt="">
+    <% if @article.errors.any? %>
+      <h2>The folowing errors prevent the articles from being saved</h2>
+      <ul>
+        <% @article.errors.full_messages.each do |msg| %>
+            <li><%=msg%></li>  
+      
+        <%end%>
+        </ul>
     <%end%>
-    </ul>
-<%end%>
-
-<%= form_with(model: @article, url: update_article_path, local: true) do |f|%>
-   <p>
-    <%= f.label :title%>
-    <br/>
-    <%= f.text_field :body%>
-   </p>
-
-   <p>
-    <%= f.label :description%>
-    <br/>
-    <%= f.text_area :body%>
-  </p>
-  <p>
-  <% if @article.photo.attached?%>
-  <img id="img_prev"  src="<%=(url_for(@article.photo))%>" alt="">
-  <% end %>
-   
- 
-
-  <%= f.label :Image%>
-  <br/>
-  <%= f.file_field :photo%>
-</p>
-  <p>
-     <%= f.submit %>
- 
-    </p>
+    <div class="container shadow-sm mt-4">
+        <%= form_with(model: @article, url: update_article_path, local: true) do |f|%>
+          <div class="mb-3">  
+          <%= f.label :title, :class=>"form-label"%>
+          <%= f.text_field :name, placeholder: "Blog Title" , :class=>"form-control"%>
+        </div> 
 
 
-    <% end %>
-    <%= link_to 'Cancel and Return to articles listing',articles_path %> 
     
+          <% if @article.photo.attached?%>
+          <div class="img-container p-3"> 
+          <img class="img-fluid" id="img_prev"  src="<%=(url_for(@article.photo))%>" alt="">
+          </div>
+          <% else%>
+          <div class="container shadow-sm mt-4">
+
+          <img class="img-fluid" class="img-fluid" id="img_prev"  src="<%= asset_path('upload_image.png')%>" alt="">
+          </div>
+          <% end %>
+       
+
+        <div class="mb-3">
+        <%= f.label :"Select Hero Image",:class=>"form-label"%>
+        <%= f.file_field :photo,:class=>"form-control form-control-lg image-upload"%>
+        </div>
+        <div class="mb-3">
+          <%= f.label :"Blog Body", :class=>"form-label"%>
+          <br/>
+          <%= f.rich_text_area :fullbody, wrap: "hard", placeholder: "Whats on your mind" ,:class=>"form-control blog-body"%>
+        </div>
+        <div class="d-flex flex-row-reverse">
+        <%= link_to 'Cancel',articles_path, class: 'btn btn-danger' %> 
+
+        <%= f.button :submit, :class=>"btn btn-post" do %>
+        <i class='fa fa-paper-plane'></i> post
+        <% end %>
+        </div>
+
+        <% end %>
+    </div>
+
+</div>
+
+
     <script>
     
     const uploadImageInput = document.getElementById("article_photo")

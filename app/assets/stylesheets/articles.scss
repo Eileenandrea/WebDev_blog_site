@@ -13,6 +13,8 @@
 
 .blog-body{
     min-height: 600px;
+    max-height: 1000px;
+    overflow-y: scroll;
 }
 .image-upload{
     height: 15px  !important;
