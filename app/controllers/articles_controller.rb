@@ -10,9 +10,7 @@ class ArticlesController < ApplicationController
         @article = Article.new
     end
     def create
-        byebug
         @article = Article.new(articles_params)
-        byebug
         if @article.valid?
             @article.save
             redirect_to articles_path
