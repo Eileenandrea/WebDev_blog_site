@@ -10,8 +10,9 @@ class ArticlesController < ApplicationController
         @article = Article.new
     end
     def create
+        byebug
         @article = Article.new(articles_params)
-
+        byebug
         if @article.valid?
             @article.save
             redirect_to articles_path
@@ -23,7 +24,7 @@ class ArticlesController < ApplicationController
     
     end
     def update
-
+   
         if  @article.update(articles_params)
          flash[:notice] = 'Article was updated successfully.'
          redirect_to show_article_path(@article)
@@ -40,7 +41,7 @@ class ArticlesController < ApplicationController
         @article = Article.find(params[:id])
    end
     def articles_params
-        params.require(:article).permit(:name,:body,:photo)
+        params.require(:article).permit(:name,:body,:photo,:fullbody)
     end
     
 end
