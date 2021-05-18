@@ -14,6 +14,11 @@
     object-fit: scale-down;
 }
 
+#img_hero{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
 .blog-body{
     min-height: 600px;
     max-height: 1000px;
@@ -43,6 +48,7 @@
 }
 .hero-image-container{
     position: relative;
+    height: 70vh;
 }
 .hero-image-heading{
     &-container{
