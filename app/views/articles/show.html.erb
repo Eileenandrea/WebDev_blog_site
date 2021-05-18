@@ -1,8 +1,49 @@
 
-<h1>Showing article details</h1>
-<p><strong>Title: </strong> <%= @article.name%></p>
+<div class="hero-image-container">
+<% if @article.photo.attached?%>
+<img class="img-fluid" id="img_prev"  src="<%=(url_for(@article.photo))%>" alt="">
+<% end %>
+    <div class="hero-image-heading-container">
+        <h1 class="hero-image-heading-text"><%= @article.name%></h1>
+    </div>
+    <%= link_to articles_path, class:"link-articles-list" do %>
+        <button class="btn-icon-list" data-toggle="tooltip" data-placement="bottom" title="Articles list">
+             <i class="fas fa-arrow-circle-left"></i>
+         </button>
+       
+        <%end%>
+   
+</div>
 
-<p><strong>Description: </strong> <%= @article.fullbody%> </p>
-<%= link_to 'Edit',edit_article_path(@article) %> | 
-<%= link_to 'Delete',delete_article_path(@article), method: :delete, data: {confirm: "Are you sure?"} %> |
-<%= link_to 'Return to articles listing',articles_path %> |
+<div class="container">
+    <div class="top-info-container mt-4 mb-5">
+        <div class="time">
+            <div class="time-created"> 
+                 <i class="far fa-calendar-alt"></i>                 
+                Created at <%= time_ago_in_words(@article.created_at) %> ago
+            </div>
+            <div class="time-created"> 
+            <i class="far fa-edit"></i>                 
+           Updated at <%= @article.updated_at.strftime("%A, %d %B %Y") %> ago
+       </div>
+        </div> 
+        <div class="action-icons">
+        <%= link_to edit_article_path(@article) do %>
+            <button class="btn-icon" data-toggle="tooltip" data-placement="bottom" title="Edit">
+                <i class="far fa-edit"></i>
+             </button>
+           
+            <%end%>
+        <%= link_to delete_article_path(@article), method: :delete, data: {confirm: "Are you sure?"} do %> 
+            <button class="btn-icon" id="delete-icon" data-toggle="tooltip" data-placement="bottom" title="Edit">
+            <i class="fas fa-trash-alt"></i>
+         </button>
+       
+            <%end%>
+        </div>
+    </div>
+
+    <p><%= @article.fullbody%> </p>
+   
+</div>
+

@@ -5,10 +5,13 @@
 .img-container  {
     margin: auto;
     height: 200px;
-    width: 200px;
+    max-width: 90%;
 }
 
 #img_prev{
+    height: 100%;
+    width: 100%;
+    object-fit: scale-down;
 }
 
 .blog-body{
@@ -37,4 +40,57 @@
 .main-body{
     background-color: #eeeeee;
     padding: 3rem 0;
+}
+.hero-image-container{
+    position: relative;
+}
+.hero-image-heading{
+    &-container{
+    color: white;
+    position: absolute;
+    background-color:#00adb5 ;
+    top: 100%;
+    right: 5%;
+    transform: translate(0,-50%) skewX(-20deg);
+    padding: 0.5rem 2rem;
+    }
+    &-text{
+        display: block;
+        transform: skewX(20deg);
+    }
+}
+
+.top-info-container{
+    display: flex;
+    justify-content: space-between;
+}
+.btn-icon{
+    background-color: white !important;
+    border-style: none;
+    color:  #00adb5;
+}
+a,
+a:link,
+a:visited{
+    text-decoration: none !important;
+}
+#delete-icon{
+    color: rgb(245, 33, 33);
+}
+.time{
+    margin: 20px 0;
+    font-weight: 500;
+    color: rgb(110, 110, 110);
+    
+}
+.link-articles-list{
+    position: absolute;
+    top: 0;
+    left: 1.5%;
+}
+.btn-icon-list{
+    background-color: transparent;
+    border-style: none;
+    color: #eeeeee;
+    font-size: 40px;
 }
