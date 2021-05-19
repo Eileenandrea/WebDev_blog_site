@@ -1,15 +1,8 @@
 <div class="main-body">
   <h1 class="heading-primary-h1">Create a new article</h1>
+  <%= render 'shared/errors' %>
 
-  <% if @article.errors.any? %>
-    <h2>The folowing errors prevent the articles from being saved</h2>
-    <ul>
-      <% @article.errors.full_messages.each do |msg| %>
-          <li><%=msg%></li>  
-    
-      <%end%>
-      </ul>
-  <%end%>
+ 
   <div class="container shadow-sm mt-4">
       <%= form_with scope: :article, url: create_article_path, local:true do |f|%>
         <div class="mb-3">  
