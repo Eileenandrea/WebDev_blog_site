@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   patch '/articles/:id', to: 'articles#update', as: 'update_article'
   delete '/articles/:id', to: 'articles#destroy', as: 'delete_article'
   get '/about', to: 'pages#about'
+  get 'signup', to: 'users#new'
+  resources :users, except: [:new]
+
 end

@@ -1,7 +1,7 @@
 <div class="main-body">
     <h1 class="heading-primary-h1">Edit Article</h1>
     <img src="" alt="">
-    <%= render 'shared/errors' %>
+    <%= render 'shared/errors', obj: @article %>
     <div class="container shadow-sm mt-4">
         <%= form_with(model: @article, url: update_article_path, local: true) do |f|%>
           <div class="mb-3">  
