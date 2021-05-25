@@ -5,5 +5,5 @@ class Article < ApplicationRecord
     validates :fullbody, presence: true
     has_one_attached :photo
     has_rich_text :fullbody
-
+    belongs_to :user
 end
