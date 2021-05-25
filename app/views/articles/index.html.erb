@@ -1,40 +1,10 @@
-<div id="page-content">
-    <h1 class="heading-primary-h1 mt-3">Blogs</h1>
+<h1>Articles Listing</h1>
 
-    <%= link_to 'Create New Blog',new_article_path, class:'btn btn-create' %>
-
-    <div class="container container-flex mt-4">
-    <% @articles.each do |article|%>
-
-    <div class="card mb-5" style="width: 18rem;">
-        <div class="card-image-container">
-            <% if article.photo.attached?%>
-                <img class="card-img-top" id="img_list_show"  src="<%=(url_for(article.photo))%>" alt="">
-            <% end %>
-        </div>
-        <div class="card-body">
-            <h5 class="card-title"><%= link_to article.name, show_article_path(article),class:"text-success"%></h5>
-            <div class="time-articles mt-2 mb-3">
-                <div class="time-articles-created"> 
-                    <i class="far fa-calendar-alt"></i>                 
-                    Created at <%= time_ago_in_words(article.created_at) %> ago
-                </div>
-                <div class="time-articles-created"> 
-                <i class="far fa-edit"></i>                 
-                 Updated at <%= article.updated_at.strftime("%A, %d %B %Y") %>
-                </div>
-            </div>
-
-            <p class="card-text"><%= truncate(strip_tags(article.fullbody.to_s),length:200) %></p>
-            <%= link_to "View", show_article_path(article),class:"btn btn-outline-success"%>
-            <%= link_to "Edit", edit_article_path(article),class:"btn btn-outline-info"%>
-            <%= link_to "Delete", delete_article_path(article), method: :delete, data: {confirm: "Are you sure?"},class:"btn btn-outline-danger"%>
-        </div>
-    </div>
-        
-        
-    <% end %>
-    </div>
-
-
-</div>
+<div class="flickr_pagination">
+    <%= will_paginate @articles, :container => false %>
+  </div>
+<%= render 'articles'%>
+<div class="flickr_pagination">
+    <div class="page_info">
+    <%= will_paginate @articles, :container => false %>
+  </div>

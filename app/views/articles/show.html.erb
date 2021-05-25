@@ -18,6 +18,8 @@
 <div class="container">
     <div class="top-info-container mt-4 mb-5">
         <div class="time">
+        <p>By: <%= link_to @article.user.username, user_path(@article.user)%></p>
+
             <div class="time-created"> 
                  <i class="far fa-calendar-alt"></i>                 
                 Created at <%= time_ago_in_words(@article.created_at) %> ago
