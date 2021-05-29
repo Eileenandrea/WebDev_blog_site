@@ -7,4 +7,7 @@ class ApplicationController < ActionController::Base
      def logged_in?
         !!current_user
     end
+    def set_user
+        @user = User.find(params[:id])
+      end
 end
