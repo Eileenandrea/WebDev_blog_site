@@ -3,13 +3,11 @@ class SessionsController < ApplicationController
     end
     def create
         user = User.find_by(email: params[:session][:email])
-        byebug
 
         if user && user.authenticate(params[:session][:password])
             session[:user_id] = user.id
             flash[:notice] = 'Logged in successfully'
             redirect_to user
-            byebug
         else
             flash.now[:alert] = "Wrong Email or Password"
             render 'new'
