@@ -1,29 +1,62 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <%= link_to "WebDevBlog", root_path,class:"navbar-brand", id:"logo"%>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        
-      </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-search" type="submit">Search</button>
-      </form>
-      <div>
-      <% if logged_in? %>
-      <%= link_to current_user.username,user_path(current_user) %>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+<div class="container-fluid">
+  <%= link_to "WebDevBlog", root_path,class:"navbar-brand", id:"logo"%>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <form class="d-flex me-auto">
+  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+  <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+
+    <ul class="navbar-nav  mb-2 mb-lg-0">
+      < class="nav-item">
+        <%= link_to users_path, class:"nav-link active" do %>
+          <i class="fas fa-users"></i> Bloggers
+          <%end%>
+
+      </li>
+      <li  class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           <i class="fas fa-newspaper"></i> Articles
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><%= link_to 'View Articles', articles_path,class:"dropdown-item" %></li>
+            <%if logged_in?%>
+            <li><%= link_to 'Create New Article', new_article_path, class:"dropdown-item" %></li>
+            <%end%>
+        </ul>
+      </li>
+        <%if logged_in?%>
+          <li  class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fas fa-user-circle"></i> <%=current_user.username.capitalize%> <%=current_user.admin ? "(Admin)" : "" %>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><%= link_to 'View Profile', user_path(current_user),class:"dropdown-item" %></li>
+                <li><%= link_to 'Edit User', user_path(current_user),class:"dropdown-item" %></li>
+                <li><hr class="dropdown-divider"></li>
+              
+              <li><%= link_to 'Delete Profile',user_path(current_user), method: :delete, data:{confirm: "Are you sure?" },class:"dropdown-item text-danger" %></li>
+              <li><%= link_to 'Logout',logout_path, method: :delete,class:"dropdown-item" %></li>
+              </li>
+              </ul>
       
-       <%= link_to 'Logout',logout_path, method: :delete, class: 'btn btn-success btn-lg' %>
-      
-      <%else%>
-        <%= link_to 'Login', login_path, class: 'btn btn-success btn-lg' %>
+        <%else%>
+          <li class="nav-item">
+          <%= link_to login_path, class:"nav-link active" do %>
+            <i class="fas fa-sign-in-alt"></i> Login
+            <%end%>
+        </li>
       <%end%>
-      
-      </div>
-    </div>
+
+
+    
   </div>
+</div>
 </nav>
+
+

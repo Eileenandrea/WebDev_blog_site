@@ -29,20 +29,22 @@
            Updated at <%= @article.updated_at.strftime("%A, %d %B %Y") %>
        </div>
         </div> 
-        <div class="action-icons">
-        <%= link_to edit_article_path(@article) do %>
-            <button class="btn-icon" data-toggle="tooltip" data-placement="bottom" title="Edit">
-                <i class="far fa-edit"></i>
-             </button>
-           
-            <%end%>
-        <%= link_to delete_article_path(@article), method: :delete, data: {confirm: "Are you sure?"} do %> 
-            <button class="btn-icon" id="delete-icon" data-toggle="tooltip" data-placement="bottom" title="Edit">
-            <i class="fas fa-trash-alt"></i>
-         </button>
-       
-            <%end%>
-        </div>
+        <%if logged_in? && current_user == @article.user %>
+            <div class="action-icons">
+            <%= link_to edit_article_path(@article) do %>
+                <button class="btn-icon" data-toggle="tooltip" data-placement="bottom" title="Edit">
+                    <i class="far fa-edit"></i>
+                </button>
+            
+                <%end%>
+            <%= link_to delete_article_path(@article), method: :delete, data: {confirm: "Are you sure?"} do %> 
+                <button class="btn-icon" id="delete-icon" data-toggle="tooltip" data-placement="bottom" title="Edit">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        
+                <%end%>
+            </div>
+        <%end%>
     </div>
 
     <p><%= @article.fullbody%> </p>

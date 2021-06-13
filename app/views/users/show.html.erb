@@ -2,8 +2,9 @@
 
 <%= gravatar_for @user, size: 200%>
 <div class="text-center mt-4">
+<%if logged_in? && current_user == @user %>
     <%= link_to "Edit profile", edit_user_path(@user),class:"btn btn-outline-success text-center"%>
-
+<%end%>
 </div>
 <div class="flickr_pagination">
     <%= will_paginate @articles, :container => false %>

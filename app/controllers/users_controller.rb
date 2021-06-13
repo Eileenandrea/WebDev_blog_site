@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-    before_action :set_user, only: [:show, :edit, :update]
+    before_action :require_user, except: [:index, :show, :new, :create]
+    before_action :set_user, only: [:show]
+    before_action :set_user_own, only: [:edit, :update, :destroy]
     def new
         @user = User.new
     end
@@ -33,8 +35,24 @@ class UsersController < ApplicationController
     def index
         @users = User.all
     end
+    def destroy
+        @user.destroy
+        session[:user_id] = nil
+        flash[:notice] = "account and all Associated article successfully deleted"
+        redirect_to login_path
+    end
     private
-     
+    def set_user
+        @user = User.find(params[:id])
+    end
+    def set_user_own
+       
+        if current_user == User.find(params[:id])
+            @user = User.find(params[:id])
+        else
+            redirect_back fallback_location: articles_path
+        end
+    end
     def user_params
         params.require(:user).permit(:username, :email, :password)
     end
