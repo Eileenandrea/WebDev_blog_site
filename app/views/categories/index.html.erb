@@ -1,0 +1,31 @@
+<h1 class="text-center mt-4">Categories</h1>
+<div class="flickr_pagination">
+    <%= will_paginate @categories, :container => false %>
+  </div>
+<div class="container container-flex mt-4">
+    <% @categories.each do |category|%>
+    <div class="card mb-5" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title text-center"><%= link_to category.name, category_path(category),class:"text-success"%></h5>
+           <p class="card-text text-center"><%= pluralize(category.articles.count,"article")%></p>
+        </div>
+        <div class="card-footer">
+            <div class="time-categorys mt-2 mb-3">
+                <div class="time-categorys-created"> 
+                <i class="far fa-calendar-alt"></i>                 
+                Created at <%= time_ago_in_words(category.created_at) %> ago
+                </div>
+            </div>
+            <div class="links d-flex">        
+                    <%= link_to "View", category_path(category),class:"btn btn-outline-success flex-grow-1"%>
+                    <% if logged_in? && current_user.admin?%>
+                        <%= link_to "Edit", edit_category_path(category),class:"btn btn-outline-info flex-grow-1"%>
+                    <%end%>
+            </div>
+        </div>
+    </div>
+    <%end%>
+    <div class="flickr_pagination">
+    <%= will_paginate @categories, :container => false %>
+  </div>
+</div>

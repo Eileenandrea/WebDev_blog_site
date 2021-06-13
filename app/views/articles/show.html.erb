@@ -28,6 +28,9 @@
             <i class="far fa-edit"></i>                 
            Updated at <%= @article.updated_at.strftime("%A, %d %B %Y") %>
        </div>
+        <%if @article.categories.any?%>
+           <div class="mt-2"><%=render @article.categories%></div> 
+        <%end%>
         </div> 
         <%if logged_in? && current_user == @article.user %>
             <div class="action-icons">

@@ -1,5 +1,5 @@
-require "test_helpers"
+require "test_helper"
 
-class 
+class UserTest < ActiveSupport::TestCase
     
 end

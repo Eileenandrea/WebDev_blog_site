@@ -1,0 +1,14 @@
+<%=render 'shared/errors', obj: @category%>
+<div class="container">
+    <%= form_with(model: @category, local: true) do |f|%>
+        <%= f.label 'Category Name', :class=>"form-label"%>
+        <%= f.text_field :name, placeholder: "Enter Category name" , :class=>"form-control"%>
+
+        <div class="d-flex flex-row-reverse mt-3">
+        <%= link_to 'Cancel',category_path(@category), class: 'btn btn-danger' %> 
+
+        <%= f.submit(@category.new_record? ? 'New Category' : 'Update Category', :class=>"btn btn-post")%>
+        </div>
+
+    <%end%>
+</div>
